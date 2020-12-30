@@ -14,3 +14,17 @@ a {
 * {
   box-sizing: border-box;
 }
+.red{
+  color:red;
+}
+row{
+  display: flex;
+}
+
+container {
+  min-height: 100vh;
+  padding: 0 0.5rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}

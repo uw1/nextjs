@@ -1,0 +1,22 @@
+markdown {
+  max-width: 666px;
+  margin-top: 1em;
+}
+toc {
+  position: fixed;
+  display: flex;
+  flex-direction: column;
+  top: 0;
+  left: calc(50% + 333px);
+  justify-content: center;
+  height: 100%;
+  margin-left: 35px;
+  background: #fff;
+  padding-right: 8px;
+  max-width: 300px;
+}
+
+toc a {
+  border-left: 2px gray solid;
+  padding: 5px;
+}
