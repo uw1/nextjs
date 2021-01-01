@@ -50,3 +50,9 @@ td {
 td:last-child {
   border-right: 0;
 }
+table td {
+  text-align: right;
+}
+table td:first-child {
+  text-align: left;
+}
