@@ -1,13 +1,16 @@
 import Head from 'next/head'
 import marked from 'marked'
 import { useRouter } from 'next/router'
-
+marked.setOptions({
+  breaks: true,
+  smartLists: true,
+})
 function wikilink(text) {
-  return `<a class="red" href="md/${encodeURI(text)}">${text}</a>`
+  return `<a class="red" href="/md/${encodeURI(text)}">${text}</a>`
 }
 export default function markdown(md, show, setShow) {
   let tokens = marked.lexer(md.replace(/\[\[([^\]]+)\]\]/g, (_, t) => wikilink(t)))
-  let title = tokens.find(t => t.type == 'heading').text
+  // let title = tokens.find(t => t.type == 'heading').text
   // document.title = title
   let router = useRouter()
   let click = e => {

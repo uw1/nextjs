@@ -15,7 +15,7 @@ a {
   box-sizing: border-box;
 }
 .red{
-  color:red;
+  color: #ff2d51 !important;
 }
 row{
   display: flex;
@@ -27,4 +27,26 @@ container {
   display: flex;
   justify-content: center;
   align-items: center;
+}
+ul {
+  padding-left: 1.2em;
+}
+
+table {
+  border-spacing: 0;
+  border: 1px solid black;
+}
+tr:last-child td{
+  border-bottom: 0;
+}
+
+th,
+td {
+  margin: 0;
+  padding: 0.5rem;
+  border-bottom: 1px solid black;
+  border-right: 1px solid black;
+}
+td:last-child {
+  border-right: 0;
 }
