@@ -2,7 +2,7 @@ import { useRouter } from 'next/router'
 import getGithub from '../../data/getGithub'
 import markdown from '../../ui/markdown'
 import { useState } from 'react';
-import navbar from '../_navbar'
+import navbar from '../navbar'
 
 export default function md() {
   const router = useRouter()
@@ -13,7 +13,7 @@ export default function md() {
   if (error) return <container><pre>Error: {error}</pre></container>
   if (!text) return <container>Loading...</container>
   return <div>
-    {navbar('首页 资源 笔记')}
+    {navbar()}
     {navSwitch(show,setShow)}
     {markdown(text,show,setShow)}
   </div>

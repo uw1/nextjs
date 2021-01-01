@@ -1,6 +1,6 @@
 import getJSON from '../data/getJSON'
 import { useState } from 'react';
-import navbar from './_navbar'
+import navbar from './navbar'
 import {useTable,useSortBy} from 'react-table'
 
 export default function md() {
@@ -37,7 +37,7 @@ export default function md() {
   ]
   return <div>
     <Table columns={columns} data={data} />
-    {navbar('首页 资源 笔记')}
+    {navbar()}
   </div>
 }
 

@@ -1,7 +1,7 @@
 import Link from 'next/link'
 
-export default function navbar(str) {
-  let names = str.split(' ')
+export default function navbar() {
+  let names = '首页 资源 笔记'.split(' ')
   return <nav>
     {names.map(link)}
   </nav>
