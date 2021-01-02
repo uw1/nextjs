@@ -14,23 +14,32 @@ export default function md() {
     // {Header: '收藏数', accessor: 'favorites' },
     // {Header: '播放数', accessor: 'play' }
   const router = useRouter()
-  const { id, month, year } = router.query
+  console.log('load')
   useEffect(() => {
-    if (!(id || month || year)) {
+    let {id, month, year} = parseQuery(location.search)
+    if (!id || !month || !year) {
       router.push({ pathname:'/bilibili', query:{
         id: id||21,
         month: month||1,
         year: year||2020
       }})
     }
-  }, [id, month, year])
+  })
   return <div>
     {menubar()}
     {xTable()}
     {navbar()}
   </div>
 }
-
+function parseQuery(queryString) {
+  var query = {};
+  var pairs = (queryString[0] === '?' ? queryString.substr(1) : queryString).split('&');
+  for (var i = 0; i < pairs.length; i++) {
+      var pair = pairs[i].split('=');
+      query[decodeURIComponent(pair[0])] = decodeURIComponent(pair[1] || '');
+  }
+  return query;
+}
 function parseTSV ({columns, tsv}){
   columns = columns.split(' ')
   return tsv.split('\n').map(line=>{
@@ -123,7 +132,6 @@ function menuitem (name, id, month,year) {
 function xTable () {
   let router = useRouter()
   let {id=21,month=1,year=2020} = router.query
-  console.log(router.query)
   if(!month) (month = 12, year--)
   if(month>12) (month = 1, year++)
   let { json, error } = getJSON('bilibili/'+id+year+month+'.json')
@@ -147,7 +155,8 @@ function xTable () {
       }
     },
     {Header: '收藏率', accessor: 'rSave' },
-    {Header: '播放数', accessor: 'play' }
+    {Header: '播放数', accessor: 'play' },
+    {Header: '日期', accessor: 'date', width: 100 },
   ]
   return  <Table columns={columns} data={data} />
 }
