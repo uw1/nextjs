@@ -110,7 +110,7 @@ function Table({ columns, data }) {
 function menubar () {
   let query = useRouter().query
   let {id,month,year} = query
-  return <row>
+  return <div class="group">
     {menuitem('日常', 21, month, year)}
     {menuitem('社科', 124, month, year)}
     {menuitem('技术', 122, month, year)}
@@ -120,7 +120,7 @@ function menubar () {
     {menuitem('记录', 178, month, year)}
     {menuitem('上月', id, +month-1, year)}
     {menuitem('下月', id, +month+1, year)}
-  </row>
+  </div>
 }
 function menuitem (name, id, month,year) {
   if(!month) (month = 12, year--)
@@ -129,9 +129,12 @@ function menuitem (name, id, month,year) {
   let p = {
     onClick(){
       router.push({ pathname: '/bilibili', query:{id,month,year}})
+    },
+    style: {
+      padding: '8px'
     }
   }
-  return <button {...p}>{name}</button>
+  return <button class="black" {...p}>{name}</button>
 }
 function xTable () {
   let router = useRouter()
