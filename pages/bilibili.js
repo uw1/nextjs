@@ -3,6 +3,7 @@ import { useEffect } from 'react';
 import navbar from './navbar'
 import {useTable,useSortBy} from 'react-table'
 import { useRouter } from 'next/router'
+import Head from 'next/head'
 
 export default function md() {
     // {Header: '日期', accessor: 'date', width: 100 },
@@ -26,6 +27,9 @@ export default function md() {
     }
   })
   return <div>
+    <Head>
+      <link href="https://unpkg.com/bonsai.css@latest/dist/bonsai.min.css" rel="stylesheet"></link>
+    </Head>
     {menubar()}
     {xTable()}
     {navbar()}

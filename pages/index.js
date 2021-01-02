@@ -18,7 +18,9 @@ let text = `
 export default function Home() {
   return (
     <div className=''>
-      <Head></Head>
+      <Head>
+        <link href="https://unpkg.com/bonsai.css@latest/dist/bonsai.min.css" rel="stylesheet"></link>
+      </Head>
       <main>
         {markdown(text)}
       </main>
