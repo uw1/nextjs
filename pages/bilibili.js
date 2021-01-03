@@ -6,8 +6,7 @@ import { useRouter } from 'next/router'
 import Head from 'next/head'
 
 export default function md() {
-    // {Header: '日期', accessor: 'date', width: 100 },
-    // {Header: '分钟', accessor: 'duration' },
+    // {Header: '日期', accessor: 'date', width: 100 },    
     // {Header: '作者', accessor: 'author' },
     // {Header: '分数', accessor: 'rank_score' },
     // {Header: '收藏分', accessor: 'multi' },
@@ -107,21 +106,7 @@ function Table({ columns, data }) {
   )
 }
 
-function menubar () {
-  let query = useRouter().query
-  let {id,month,year} = query
-  return <div class="group">
-    {menuitem('日常', 21, month, year)}
-    {menuitem('社科', 124, month, year)}
-    {menuitem('技术', 122, month, year)}
-    {menuitem('财经', 207, month, year)}
-    {menuitem('职场', 209, month, year)}
-    {menuitem('科学', 201, month, year)}
-    {menuitem('记录', 178, month, year)}
-    {menuitem('上月', id, +month-1, year)}
-    {menuitem('下月', id, +month+1, year)}
-  </div>
-}
+
 function menuitem (name, id, month,year) {
   if(!month) (month = 12, year--)
   if(month>12) (month = 1, year++)
@@ -136,6 +121,21 @@ function menuitem (name, id, month,year) {
   }
   return <button class="black" {...p}>{name}</button>
 }
+function menubar () {
+  let query = useRouter().query
+  let {id,month,year} = query
+  return <div class="group">
+    {menuitem('日常', 21, month, year)}
+    {menuitem('社科', 124, month, year)}
+    {/* {menuitem('技术', 122, month, year)} */}
+    {menuitem('财经', 207, month, year)}
+    {menuitem('职场', 209, month, year)}
+    {menuitem('科学', 201, month, year)}
+    {menuitem('记录', 178, month, year)}
+    {menuitem('上月', id, +month-1, year)}
+    {menuitem('下月', id, +month+1, year)}
+  </div>
+}
 function xTable () {
   let router = useRouter()
   let {id=21,month=1,year=2020} = router.query
@@ -145,7 +145,7 @@ function xTable () {
   if (error) return <container><pre>Error: {error}</pre></container>
   if (!json) return <container>Loading...</container>
   let data = parseTSV(json).map(o=>{
-    o.rSave = (o.favorites * 100 / o.play).toFixed(2)
+    o.rSave = (o.favorites * 100 / o.play).toFixed(1)
     o.duration = (o.duration / 60).toFixed(0)
     o.date = o.pubdate.slice(0,10)
     o.rComment = (o.review * 100 / o.play).toFixed(2)
@@ -154,16 +154,17 @@ function xTable () {
     return o
   })
   let columns = [
-    {Header: '标题', accessor: 'title',        
+    // {Header: '时', accessor: 'duration',sortDescFirst: 1 },
+    {Header: '标题', accessor: 'title',
       Cell: ({row}) => {
         let {title, bvid} = row.original
         let url = 'https://bilibili.com/video/' + bvid
         return <a href={url}>{title}</a>
       }
     },
-    {Header: '收藏率', accessor: 'rSave' },
-    {Header: '播放数', accessor: 'play' },
-    {Header: '日期', accessor: 'date', width: 100 },
+    {Header: '藏', accessor: 'rSave', sortDescFirst: 1 },
+    {Header: '播', accessor: 'play',sortDescFirst: 1 },
+    // {Header: '日期', accessor: 'date', width: 100 },
   ]
   return  <Table columns={columns} data={data} />
 }

@@ -53,6 +53,6 @@ td:last-child {
 table td {
   text-align: right;
 }
-table td:first-child {
+table td:nth-child(1) {
   text-align: left;
 }
